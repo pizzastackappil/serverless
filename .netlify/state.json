@@ -1,0 +1,19 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Herzliya",
+			"country": {
+				"code": "IL",
+				"name": "Israel"
+			},
+			"subdivision": {
+				"code": "TA",
+				"name": "Tel Aviv"
+			},
+			"timezone": "Asia/Jerusalem",
+			"latitude": 32.1678,
+			"longitude": 34.8205
+		},
+		"timestamp": 1707855820506
+	}
+}
