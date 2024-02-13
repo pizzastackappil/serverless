@@ -4,16 +4,22 @@
   "description": "",
   "scripts": {
     "started": "netlify dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.2",
     "@netlify/functions": "^2.6.0",
-    "cd": "^0.3.3"
+    "cd": "^0.3.3",
+    "typescript": "^5.3.3",
+    "@graphql-codegen/typescript": "4.0.4",
+    "@graphql-codegen/typescript-resolvers": "4.0.4"
   },
   "dependencies": {
+    "graphql": "^16.8.1",
     "jsonwebtoken": "^9.0.2"
   }
 }
