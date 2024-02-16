@@ -1,8 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../Downloads/React/Pizza/serverless/netlify/functions/hello/hello.ts"],
-  "sourceRoot": "C:/Users/tzipi/AppData/Local/Temp/tmp-10068-1D262181lH09",
-  "sourcesContent": ["import type { Handler, HandlerEvent, HandlerContext } from \"@netlify/functions\";\r\n\r\nconst handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {\r\n  return {\r\n    statusCode: 200,\r\n    body: JSON.stringify({ message: \"Hello World\" }),\r\n  };\r\n};\r\n\r\nexport { handler };"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEA,IAAM,UAAmB,OAAO,OAAqB,YAA4B;AAC/E,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU,EAAE,SAAS,cAAc,CAAC;AAAA,EACjD;AACF;",
-  "names": []
-}

@@ -24,8 +24,8 @@ export type AdminRegisterInput = {
   username: Scalars['String']['input'];
 };
 
-export type AdminRegisterQutput = {
-  __typename?: 'AdminRegisterQutput';
+export type AdminRegisterOutput = {
+  __typename?: 'AdminRegisterOutput';
   accessToken: Scalars['String']['output'];
 };
 
@@ -492,7 +492,7 @@ export type Mutation_Root = {
   /** insert a single row into the table: "menu" */
   insert_menu_one?: Maybe<Menu>;
   /** Admin registration */
-  register?: Maybe<AdminRegisterQutput>;
+  register?: Maybe<AdminRegisterOutput>;
   /** update data of the table: "admin" */
   update_admin?: Maybe<Admin_Mutation_Response>;
   /** update single row of the table: "admin" */
