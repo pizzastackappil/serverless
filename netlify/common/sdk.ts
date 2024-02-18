@@ -19,6 +19,16 @@ export type Scalars = {
   uuid: { input: any; output: any; }
 };
 
+export type AdminLoginInput = {
+  password: Scalars['String']['input'];
+  username: Scalars['String']['input'];
+};
+
+export type AdminLoginOutput = {
+  __typename?: 'AdminLoginOutput';
+  accessToken: Scalars['String']['output'];
+};
+
 export type AdminRegisterInput = {
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
@@ -640,6 +650,8 @@ export type Query_Root = {
   __typename?: 'query_root';
   /** fetch data from the table: "admin" */
   admin: Array<Admin>;
+  /** Login admin */
+  adminLogin?: Maybe<AdminLoginOutput>;
   /** fetch aggregated fields from the table: "admin" */
   admin_aggregate: Admin_Aggregate;
   /** fetch data from the table: "admin" using primary key columns */
@@ -659,6 +671,11 @@ export type Query_RootAdminArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Admin_Order_By>>;
   where?: InputMaybe<Admin_Bool_Exp>;
+};
+
+
+export type Query_RootAdminLoginArgs = {
+  admin: AdminLoginInput;
 };
 
 
@@ -791,6 +808,13 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
+export type GetAdminByUsernameQueryVariables = Exact<{
+  _username: Scalars['String']['input'];
+}>;
+
+
+export type GetAdminByUsernameQuery = { __typename?: 'query_root', admin: Array<{ __typename?: 'admin', id: any, password: string }> };
+
 export type InsertAdminMutationVariables = Exact<{
   password?: InputMaybe<Scalars['String']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
@@ -800,6 +824,14 @@ export type InsertAdminMutationVariables = Exact<{
 export type InsertAdminMutation = { __typename?: 'mutation_root', insert_admin_one?: { __typename?: 'admin', id: any } | null };
 
 
+export const GetAdminByUsernameDocument = gql`
+    query GetAdminByUsername($_username: String!) {
+  admin(where: {username: {_eq: $_username}}) {
+    id
+    password
+  }
+}
+    `;
 export const InsertAdminDocument = gql`
     mutation insertAdmin($password: String = "", $username: String = "") {
   insert_admin_one(object: {password: $password, username: $username}) {
@@ -815,6 +847,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetAdminByUsername(variables: GetAdminByUsernameQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminByUsernameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminByUsernameQuery>(GetAdminByUsernameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminByUsername', 'query', variables);
+    },
     insertAdmin(variables?: InsertAdminMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<InsertAdminMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminMutation>(InsertAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'insertAdmin', 'mutation', variables);
     }

@@ -1,3 +1,9 @@
+query GetAdminByUsername($_username: String!) {
+  admin(where: {username: {_eq: $_username}}) {
+    id
+    password
+  }
+}
 mutation insertAdmin($password: String = "", $username: String = "") {
   insert_admin_one(object: {password: $password, username: $username}) {
     id
