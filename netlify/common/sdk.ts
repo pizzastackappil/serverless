@@ -19,6 +19,11 @@ export type Scalars = {
   uuid: { input: any; output: any; }
 };
 
+export type AdminGetMeQutput = {
+  __typename?: 'AdminGetMeQutput';
+  username: Scalars['String']['output'];
+};
+
 export type AdminLoginInput = {
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
@@ -651,6 +656,8 @@ export type Query_Root = {
   /** fetch data from the table: "admin" */
   admin: Array<Admin>;
   /** Login admin */
+  adminGetMe?: Maybe<AdminGetMeQutput>;
+  /** Login admin */
   adminLogin?: Maybe<AdminLoginOutput>;
   /** fetch aggregated fields from the table: "admin" */
   admin_aggregate: Admin_Aggregate;
@@ -815,6 +822,13 @@ export type GetAdminByUsernameQueryVariables = Exact<{
 
 export type GetAdminByUsernameQuery = { __typename?: 'query_root', admin: Array<{ __typename?: 'admin', id: any, password: string }> };
 
+export type AdminGetMeQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['uuid']['input']>;
+}>;
+
+
+export type AdminGetMeQuery = { __typename?: 'query_root', admin_by_pk?: { __typename?: 'admin', username: string } | null };
+
 export type InsertAdminMutationVariables = Exact<{
   password?: InputMaybe<Scalars['String']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
@@ -829,6 +843,13 @@ export const GetAdminByUsernameDocument = gql`
   admin(where: {username: {_eq: $_username}}) {
     id
     password
+  }
+}
+    `;
+export const AdminGetMeDocument = gql`
+    query AdminGetMe($id: uuid = "") {
+  admin_by_pk(id: $id) {
+    username
   }
 }
     `;
@@ -849,6 +870,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetAdminByUsername(variables: GetAdminByUsernameQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetAdminByUsernameQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetAdminByUsernameQuery>(GetAdminByUsernameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminByUsername', 'query', variables);
+    },
+    AdminGetMe(variables?: AdminGetMeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AdminGetMeQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AdminGetMeQuery>(AdminGetMeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AdminGetMe', 'query', variables);
     },
     insertAdmin(variables?: InsertAdminMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<InsertAdminMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminMutation>(InsertAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'insertAdmin', 'mutation', variables);

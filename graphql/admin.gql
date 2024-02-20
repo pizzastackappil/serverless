@@ -4,6 +4,11 @@ query GetAdminByUsername($_username: String!) {
     password
   }
 }
+query AdminGetMe($id: uuid = "") {
+  admin_by_pk(id: $id) {
+    username
+  }
+}
 mutation insertAdmin($password: String = "", $username: String = "") {
   insert_admin_one(object: {password: $password, username: $username}) {
     id
