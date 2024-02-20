@@ -4,8 +4,9 @@ query GetAdminByUsername($_username: String!) {
     password
   }
 }
-query AdminGetMe($id: uuid = "") {
+query GetAdminById($id: uuid = "") {
   admin_by_pk(id: $id) {
+    id
     username
   }
 }

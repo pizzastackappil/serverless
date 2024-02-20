@@ -21,6 +21,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "cloudinary": "^2.0.1",
     "crypto": "^1.0.1",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
