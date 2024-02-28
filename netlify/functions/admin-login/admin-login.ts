@@ -3,6 +3,7 @@ import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
 import { api } from "../../common/api";
 import { hashPassword } from "../../common/password";
 import { signToken } from "../../common/jwt";
+import { config } from "../../core/config";
 
 const invalidUsernameOrPassword = {
   statusCode: 404,
@@ -20,7 +21,7 @@ const handler: Handler = async (
   const data = await api.GetAdminByUsername(
     { _username: input.username },
     {
-      "x-hasura-admin-secret": "myadminsecretkey",
+      "x-hasura-admin-secret": config.hasuraAdminSecret,
     }
   );
   if (data.admin.length === 0) {

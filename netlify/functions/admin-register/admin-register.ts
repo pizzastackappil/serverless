@@ -3,6 +3,7 @@ import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
 import { hashPassword } from "../../common/password";
 import { signToken } from "../../common/jwt";
 import { api } from "../../common/api";
+import { config } from "../../core/config";
 
 
 
@@ -13,7 +14,7 @@ const handler: Handler = async (
   const { body, headers } = event;
   if (
     !headers["x-pizzastack-secret-key"] ||
-    headers["x-pizzastack-secret-key"] !== "mypizzastacksecretkey"
+    headers["x-pizzastack-secret-key"] !== config.hasuraPizzastackSecret
   ) {
     return {
       statusCode: 405,
@@ -29,7 +30,7 @@ const handler: Handler = async (
     username: input.username,
     password,
   },{
-    'x-hasura-admin-secret':'myadminsecretkey'
+    'x-hasura-admin-secret':config.hasuraAdminSecret
   });
 
   
